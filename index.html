@@ -1,0 +1,54 @@
+
+<div style="min-height: 340px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 0;">
+
+  <p style="font-size: 13px; font-weight: 500; letter-spacing: 0.1em; color: var(--color-text-tertiary); text-transform: uppercase; margin: 0 0 1rem;">Real time is</p>
+
+  <div style="background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 2rem 3rem; display: inline-flex; align-items: baseline; gap: 4px;">
+    <span id="watch" style="font-family: var(--font-mono); font-size: 52px; font-weight: 500; color: var(--color-text-primary); letter-spacing: 0.04em;"></span>
+  </div>
+
+  <div style="margin-top: 1.25rem; display: flex; gap: 24px;">
+    <div style="text-align: center;">
+      <p id="date-display" style="font-size: 14px; color: var(--color-text-secondary); margin: 0;"></p>
+    </div>
+  </div>
+
+  <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; max-width: 360px;">
+    <div style="background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 0.75rem; text-align: center;">
+      <p style="font-size: 11px; color: var(--color-text-tertiary); margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.08em;">Hours</p>
+      <p id="h-card" style="font-size: 22px; font-weight: 500; font-family: var(--font-mono); margin: 0; color: var(--color-text-primary);"></p>
+    </div>
+    <div style="background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 0.75rem; text-align: center;">
+      <p style="font-size: 11px; color: var(--color-text-tertiary); margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.08em;">Minutes</p>
+      <p id="m-card" style="font-size: 22px; font-weight: 500; font-family: var(--font-mono); margin: 0; color: var(--color-text-primary);"></p>
+    </div>
+    <div style="background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 0.75rem; text-align: center;">
+      <p style="font-size: 11px; color: var(--color-text-tertiary); margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.08em;">Seconds</p>
+      <p id="s-card" style="font-size: 22px; font-weight: 500; font-family: var(--font-mono); margin: 0; color: var(--color-text-primary);"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function tick() {
+  const now = new Date();
+  const h = pad(now.getHours());
+  const m = pad(now.getMinutes());
+  const s = pad(now.getSeconds());
+
+  document.getElementById('watch').textContent = h + ':' + m + ':' + s;
+  document.getElementById('h-card').textContent = h;
+  document.getElementById('m-card').textContent = m;
+  document.getElementById('s-card').textContent = s;
+
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('date-display').textContent =
+    days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+}
+
+tick();
+setInterval(tick, 1000);
+</script>
